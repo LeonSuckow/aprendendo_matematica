@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Open+Sans:wght@300..800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+      html {
+        scroll-behavior: smooth;
+      }
+
+      p {
+        font-size: 1.25rem;
+      }
+
+      .scroll-hidden::-webkit-scrollbar {
+        display: none;
+      }
+
+      .pulse {
+        animation: pulse 0.4s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(0.6);
+          opacity: 50%;
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @layer components {
+        /* .container {
+          @apply w-full mx-auto md:max-w-[61.25rem] lg:max-w-[61.25rem] xl:max-w-7xl;
+        } */
+
+        .custom-container {
+          @apply mx-auto px-4 sm:px-6 lg:px-8;
+        }
+
+        .custom-content {
+          @apply mx-auto w-full  sm:max-w-2xl md:max-w-[61.25rem] xl:max-w-7xl;
+        }
+
+        .container-grid {
+          @apply grid grid-cols-8 gap-7 sm:w-full xl:max-w-7xl mx-auto;
+        }
+
+        .content {
+          @apply col-span-8 px-10 lg:px-0 lg:col-span-6 lg:col-start-2;
+        }
+
+        .title-h2 {
+          @apply text-red-600 font-bold font-serif text-[1.75rem];
+        }
+
+        .title-h3 {
+          @apply text-blue-800 text-xl font-bold italic;
+        }
+
+        .box-tutorial {
+          @apply bg-gray-200 px-6 py-4 text-blue-800 italic text-base;
+        }
+
+        .text-destaque {
+          @apply text-blue-800 text-xl font-bold;
+        }
+
+        .link-destaque {
+          @apply text-red-800 text-xl font-bold italic;
+        }
+
+        .sm-col-lg-row {
+          @apply flex flex-col lg:flex-row gap-y-8 items-center  lg:justify-between;
+        }
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Open Sans"],
+              serif: ["Lora"],
+            },
+            colors: {
+              "red-600": "#da373d",
+              "red-800": "#D61A21",
+              "yellow-600": "#FFCE41",
+              "yellow-800": "#FFBD00",
+              "beige-300": "#FFF2D9",
+              "pink-800": "#BA2B70",
+              "pink-600": "#EE2A60",
+
+              "gray-200": "#EDEDED",
+              "blue-800": "#23519F",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <div class="sticky top-0 z-20">
+      <header
+        class="h-[5.5rem] max-h-[5.5rem] container-grid bg-yellow-800 relative"
+      >
+        <div class="content flex justify-end h-full relative">
+          <img
+            src="assets/img/logo_aprendendo_matematica.svg"
+            class="h-[100%] sm:h-[7.75rem] absolute inset-0 ml-10 lg:ml-0"
+          />
+          <button class="btn" onclick="toggleMenu()">
+            <img src="assets/img/icon_menu.png" alt="hamburger icon" />
+          </button>
+        </div>
+        <div
+          id="menu"
+          class="absolute duration-500 right-0 w-0 opacity-0 sm:max-w-[28.3125rem] h-screen bg-blue-800 px-10 py-10 z-20 pointer-events-none"
+        >
+          <div class="flex justify-end">
+            <button onclick="toggleMenu()">
+              <img src="assets/img/close_menu_btn.png" alt="" />
+            </button>
+          </div>
+          <ul
+            id="menuItems"
+            class="flex flex-col overflow-auto h-full overscroll-contain scroll-hidden"
+          ></ul>
+        </div>
+      </header>
+    </div>
+    <div class="z-10 relative">
+      <div class="items-center">
+        <div class="container-grid pt-20 bg-beige-300 pb-10">
+          <div
+            class="content flex flex-col md:flex-row gap-y-8 items-center lg:justify-between"
+          >
+            <h1
+              class="text-blue-800 font-bold text-4xl font-serif sm:max-w-[28.75rem]"
+            >
+              Explorando o mundo dos números: aventuras nas planificações,
+              frações e números decimais!
+            </h1>
+            <img
+              src="assets/img/ilustra1.png"
+              class="aspect-video w-full max-w-[26.5rem] object-contain"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="py-10 container-grid items-center" id="descobrindoFormas">
+        <div class="content">
+          <h2 class="title-h2">
+            Descobrindo as Formas: Uma Jornada Divertida pelas Planificações!
+          </h2>
+        </div>
+        <div class="content sm-col-lg-row">
+          <div class="flex flex-col gap-7 lg:max-w-[39.375rem]">
+            <p class="text-xl">
+              A nossa jornada pelas planificações inicia agora!
+            </p>
+            <p class="text-xl">
+              Você já observou como é a superfície de uma bola de futebol?
+              Percebeu a sua estrutura? Relembre observando a imagem da bola de
+              futebol em um campo gramado.
+            </p>
+            <p class="text-xl">
+              Veja que a bola é formada por várias peças poligonais, costuradas
+              lado a lado. Quando inflada, ela terá o formato arredondado dessas
+              peças, que se deve à pressão interna do ar. A reunião dessa
+              superfície com o seu interior é um exemplo de
+              <strong class="text-destaque">poliedro!</strong>
+            </p>
+          </div>
+          <img
+            src="assets/img/bolafutebol.png"
+            class="lg:max-w-[17.50rem] object-contain"
+            alt="Imagem de uma bola de futebol em um campo"
+          />
+        </div>
+      </div>
+
+      <div class="">
+        <div class="py-10 bg-beige-300 container-grid items-center gap-y-8">
+          <div class="content sm-col-lg-row">
+            <div>
+              <p class="text-xl mb-7">
+                Observe a imagem do poliedro para entender melhor <br />
+                as suas características.
+              </p>
+              <ol class="flex flex-col gap-7 mb-7">
+                <li class="text-xl">
+                  Cada polígono que compõe a superfície do poliedro <br />
+                  é chamado de
+                  <strong class="text-destaque">face do poliedro</strong>.
+                </li>
+                <li class="text-xl">
+                  Cada lado do poliedro é chamado de
+                  <strong class="text-destaque">aresta do poliedro</strong>.
+                </li>
+                <li class="text-xl">
+                  Cada encontro dos lados de uma face qualquer <br />
+                  do poliedro é chamado de
+                  <strong class="text-destaque">vértice do poliedro</strong>.
+                </li>
+              </ol>
+              <div class="box-tutorial max-w-[27.5rem]">
+                <span
+                  >Clique nos números posicionados sobre o poliedro para ver
+                  mais sobre essa forma geométrica.</span
+                >
+              </div>
+            </div>
+
+            <div class="sm-col-lg-row my-10 max-w-[90%]">
+              <div class="relative">
+                <button
+                  class="absolute inline-flex items-center justify-center top-1/2 -translate-y-1/2 -right-16"
+                  onclick="renderModal1(0)"
+                >
+                  <img
+                    src="assets/img/polietro_btn_1.png"
+                    class="max-w-[3.375rem] w-[80%] lg:w-[100%] object-contain"
+                  />
+                </button>
+                <button
+                  class="absolute inline-flex items-center justify-center -top-8 -left-4"
+                  onclick="renderModal1(1)"
+                >
+                  <img
+                    src="assets/img/polietro_btn_2.png"
+                    class="w-[80%] lg:w-[100%] object-contain"
+                  />
+                </button>
+                <button
+                  class="absolute inline-flex items-center justify-center -bottom-16 left-6"
+                  onclick="renderModal1(2)"
+                >
+                  <img
+                    src="assets/img/polietro_btn_3.png"
+                    class="w-[80%] lg:w-[100%] object-contain"
+                  />
+                </button>
+
+                <img
+                  src="assets/img/maozinha.png"
+                  alt=""
+                  class="block animate-pulse transition-all duration-300 w-[6.25rem] absolute -bottom-20 -right-10"
+                />
+                <img
+                  src="assets/img/polietro.png"
+                  class="lg:max-w-[18.3125rem]"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="content bg-blue-800 px-10 py-10 flex flex-col gap-8">
+            <h3 class="text-yellow-800 text-[1.75rem] font-bold italic">
+              Voltando ao exemplo da bola!
+            </h3>
+            <p class="text-xl text-white">
+              Você sabe que ela não foi criada dessa forma, certo? Primeiro, foi
+              criada uma <strong>forma planificada</strong> e, depois,
+              “fechada”, de modo a dar forma à figura esférica (a bola).
+            </p>
+            <p class="text-xl text-white">Veja o exemplo na imagem abaixo.</p>
+          </div>
+
+          <div
+            class="content flex justify-between items-center gap-8 flex-col lg:flex-row"
+          >
+            <img
+              src="assets/img/duas_bolas.png"
+              class="max-w-[14rem] object-contain cursor-pointer"
+              onclick="renderModalImage('assets/img/duas_bolas.png')"
+              alt=""
+            />
+            <div class="flex flex-col gap-5 lg:max-w-[28.125rem]">
+              <p class="text-xl">
+                <strong class="text-destaque">Planificar</strong> sólidos
+                geométricos é uma forma de apresentá-los usando apenas um plano,
+                ou seja,
+                <strong class="text-destaque"
+                  >representar um objeto tridimensional em apenas duas
+                  dimensões</strong
+                >. Para fazer uma planificação, basta construir uma figura
+                usando as partes externas em um plano bidimensional.
+              </p>
+              <p class="text-xl">
+                A planificação de sólidos geométricos é muito útil para o
+                cálculo da área e, também, para a criação de moldes para
+                realizar a montagem desses sólidos.
+              </p>
+            </div>
+            <div class="relative">
+              <img
+                class="max-w-[14.875rem] object-contain cursor-pointer"
+                src="assets/img/retas_perpediculares.png"
+                onclick="renderModalImage('assets/img/retas_perpediculares.png')"
+                alt=""
+              />
+              <img
+                src="assets/img/maozinha.png"
+                alt=""
+                class="top-40 -right-24 absolute animate-pulse transition-all duration-300 w-[6.25rem]"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-grid py-8" id="aventurarPlanificacoes">
+        <div class="content flex flex-col gap-8">
+          <h2 class="title-h2">
+            Vamos nos aventurar pelas planificações dos sólidos conhecidos!
+          </h2>
+          <p class="text-xl">
+            Alguns exemplos de sólidos são: o cubo, o paralelepípedo, o prisma,
+            a pirâmide, o cilindro e o cone. Veja os exemplos abaixo. Para
+            ampliar, clique sobre a imagem que você deseja ver.
+          </p>
+          <div
+            class="flex flex-wrap gap-x-10 lg:gap-x-[7.5rem] gap-y-14 justify-center lg:justify-start relative"
+          >
+            <img
+              src="assets/img/cubo.png"
+              alt=""
+              class="cursor-pointer object-contain"
+              onclick="renderModalImage('assets/img/cubo.png')"
+            />
+            <img
+              src="assets/img/paralelepipedo.png"
+              alt=""
+              class="cursor-pointer object-contain"
+              onclick="renderModalImage('assets/img/paralelepipedo.png')"
+            />
+            <img
+              src="assets/img/cilindro.png"
+              alt=""
+              class="cursor-pointer object-contain"
+              onclick="renderModalImage('assets/img/cilindro.png')"
+            />
+            <img
+              src="assets/img/piramide_hexagonal.png"
+              alt=""
+              class="cursor-pointer"
+              onclick="renderModalImage('assets/img/piramide_hexagonal.png')"
+            />
+            <img
+              src="assets/img/cilindro_2.png"
+              alt=""
+              class="cursor-pointer object-contain"
+              onclick="renderModalImage('assets/img/cilindro_2.png')"
+            />
+            <img
+              src="assets/img/prisma_triangulo.png"
+              alt=""
+              class="cursor-pointer"
+              onclick="renderModalImage('assets/img/prisma_triangulo.png')"
+            />
+            <img
+              src="assets/img/cone.png"
+              alt=""
+              class="cursor-pointer object-contain"
+              onclick="renderModalImage('assets/img/cone.png')"
+            />
+            <img
+              src="assets/img/maozinha.png"
+              alt=""
+              class="absolute animate-pulse transition-all duration-300 w-[6.25rem] bottom-[3.75rem] right-20"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="container-grid py-10" id="dadosCubos">
+        <div class="content flex flex-col gap-8">
+          <h2 class="title-h2">Dados são cubos!</h2>
+          <p>
+            Para montar um dado, por exemplo, precisamos construir a sua
+            planificação, ou seja, precisamos visualizar esse dado “aberto”.
+            Observe a imagem do dado planificado. Não te lembra uma daquelas
+            caixas de entrega? Só que essa daqui está, de certa forma,
+            desmontada. Veja abaixo como é um dado planificado e um dado
+            montado.
+          </p>
+          <div class="sm-col-lg-row">
+            <div class="relative">
+              <img
+                onclick="renderModalImage('assets/img/dado_planificado.png')"
+                src="assets/img/dado_planificado.png"
+                class="max-w-[17.6875rem] object-contain cursor-pointer"
+                alt=""
+              />
+              <img
+                src="assets/img/maozinha.png"
+                alt=""
+                class="absolute animate-pulse transition-all duration-300 w-[6.25rem] bottom-0 -right-10"
+              />
+            </div>
+
+            <img src="assets/img/seta-vermelha.png" class="" alt="" />
+            <div class="relative">
+              <img
+                onclick="renderModalImage('assets/img/dado_montado.png')"
+                src="assets/img/dado_montado.png"
+                class="max-w-40 object-contain cursor-pointer"
+                alt=""
+              />
+              <img
+                src="assets/img/maozinha.png"
+                alt=""
+                class="absolute animate-pulse transition-all duration-300 w-[6.25rem] bottom-0 -right-20"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="content sm-col-lg-row">
+          <p class="text-xl lg:max-w-[34.6875rem]">
+            Para entender melhor como o dado saiu desse formato planificado e
+            foi para o montado, assista
+            <a
+              target="_blank"
+              href="https://www.youtube.com/watch?si=YgfutZryZQ-V8Vay&v=6QX2LT7o_1o&feature=youtu.be"
+              class="text-red-800 italic"
+              ><strong>este vídeo</strong></a
+            >
+            disponível na internet. Você verá, na prática, como funciona a
+            planificação de sólidos geométricos!
+          </p>
+          <div class="relative">
+            <img
+              src="assets/img/voce_sabia.png"
+              class="max-w-[20.4375rem] object-contain cursor-pointer"
+              alt=""
+              onclick="renderModalVoceSabia1(3)"
+            />
+            <img
+              src="assets/img/maozinha.png"
+              alt=""
+              class="absolute animate-pulse transition-all duration-300 w-[6.25rem] -bottom-20 -right-20"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="container-grid bg-beige-300 py-10" id="sorveteGeometria">
+        <div class="content sm-col-lg-row mb-8">
+          <div class="flex flex-col gap-8 lg:max-w-[29.8125rem]">
+            <h2 class="title-h2">Sorvete tem sabor e tem geometria!</h2>
+            <p>
+              As figuras sólidas podem, muitas vezes, nos enganar, sabia? Como
+              você imagina que é a forma da embalagem de um desses sorvetes ao
+              lado?
+            </p>
+            <p>
+              Pois é, <strong class="text-destaque">não é um triângulo</strong>.
+              Na verdade, é um
+              <strong class="text-destaque">setor circular</strong>. Mas, por
+              ora, só será importante associar o sólido (cone) com a sua
+              planificação.
+            </p>
+            <p>Observe a figura abaixo:</p>
+          </div>
+          <img src="assets/img/sorvete.png " class="object-contain" alt="" />
+        </div>
+        <div class="content sm-col-lg-row">
+          <div>
+            <div class="relative">
+              <img
+                src="assets/img/sorvete_planificado.png"
+                class="object-contain cursor-pointer"
+                onclick="renderModalImage('assets/img/sorvete_planificado.png')"
+                alt=""
+              />
+              <img
+                src="assets/img/maozinha.png"
+                alt=""
+                class="absolute animate-pulse transition-all duration-300 w-[6.25rem] -bottom-20 -right-10"
+              />
+            </div>
+          </div>
+
+          <div class="lg:max-w-[24.1875rem]">
+            <p>
+              Para complementar os seus estudos em planificações, assista ao
+              vídeo a seguir, no qual uma professora mostra diversos sólidos
+              geométricos planificados!
+            </p>
+            <p>
+              <a
+                target="_blank"
+                href="https://www.youtube.com/watch?v=b31jJ7BKjAE"
+                class="link-destaque"
+                >Clique aqui</a
+              >
+              e aperte o play!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-grid py-10" id="batataChips">
+        <div class="content">
+          <div class="flex flex-col gap-8">
+            <h2 class="title-h2">Hummm... Batata chips!</h2>
+            <p>
+              Sabe aquelas latas de batatas chips que dão água na boca só de
+              pensar? Você com certeza já provou uma destas só pela embalagem,
+              não é? Essas latas são ótimos exemplos de formas geométricas que
+              podem ser planificadas!
+            </p>
+            <p>
+              Para compreender melhor o que é a planificação, podemos pensar
+              também em uma caixa, que possui formato de um
+              <strong class="text-destaque">paralelepípedo retângulo</strong>.
+            </p>
+            <p>
+              A planificação de um cilindro ocorre exatamente como na figura
+              abaixo.
+            </p>
+          </div>
+          <div
+            class="sm-col-sm-row flex-wrap gap-y-10 flex justify-center md:justify-between items-center"
+          >
+            <div class="relative">
+              <img
+                src="assets/img/cilindro_planificado.png"
+                class="object-contain max-h-[24.25rem] w-full cursor-pointer max-w-[28.125rem]"
+                onclick="renderModalImage('assets/img/cilindro_planificado.png')"
+                alt=""
+              />
+              <img
+                src="assets/img/maozinha.png"
+                alt=""
+                class="block absolute animate-pulse transition-all duration-300 w-[6.25rem] bottom-0 -right-10"
+              />
+            </div>
+
+            <img
+              src="assets/img/chips.png"
+              class="object-contain max-h-[21.25rem]"
+              alt=""
+            />
+          </div>
+          <div class="flex flex-col gap-8">
+            <p>
+              Coincidentemente, essa seria a forma de uma lata de batatas chips
+              se abríssemos uma de suas laterais! É dessa maneira que a fábrica
+              de batatas vai pensar na hora de construir a embalagem.
+            </p>
+            <p>
+              Observando a planificação, percebemos que para cada lata são
+              necessários dois círculos eum retângulo para formar a embalagem
+              como a conhecemos. Assim, é possível saber, por exemplo, a
+              quantidade de material a ser fabricado para formar o produto.
+            </p>
+            <p>
+              Sabendo que é possível planificar sólidos geométricos, vamos ver
+              como fracionar essas formas planificadas e como os números
+              decimais poderão nos ajudar! Vamos juntos!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="container-grid bg-beige-300 py-10" id="aventuraMatematica">
+          <div class="content">
+            <h2 class="title-h2 mb-10">
+              Uma Aventura Matemágica Através das Frações e dos Números Decimais
+            </h2>
+            <div class="flex justify-between items-center flex-col lg:flex-row">
+              <div class="flex flex-col gap-8 lg:max-w-[33.775rem]">
+                <h3 class="title-h3">
+                  Vamos começar pelas frações: os pedacinhos mágicos!
+                </h3>
+                <p>
+                  Podemos dizer que a pizza é a planificação de um sólido
+                  geométrico chamado esfera, correto?
+                </p>
+                <p>
+                  Imagine que você tem uma pizza deliciosa na sua frente. Pense
+                  no seu sabor favorito! Agora, você divide essa pizza em 8
+                  partes iguais. Cada fatia é uma fração.
+                </p>
+                <p>
+                  Se a pizza está dividida em 8 fatias e você pega 2 dessas
+                  delas, podemos dizer que você pegou 2/8 (dois oitavos) da
+                  pizza.
+                </p>
+              </div>
+              <img
+                src="assets/img/pizza.png"
+                class="object-contain cursor-pointer"
+                alt=""
+                onclick="renderModalImage('assets/img/pizza.png')"
+              />
+            </div>
+            <div class="flex flex-col gap-8 pt-8">
+              <p>
+                As frações apresentam, como num passe de mágica, a quantidade
+                que você tem de algo em relação ao todo! Vamos reforçar mais um
+                pouco sobre esse tema?
+              </p>
+              <p>
+                Reveja o tema de Frações com diversos exemplos práticos neste
+                vídeo disponibilizado na internet.
+                <a
+                  class="link-destaque"
+                  target="_blank"
+                  href="https://www.youtube.com/watch?v=0ybf50eLFlY"
+                  >Clique aqui</a
+                >
+                e aperte o play!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <div class="container-grid bg-blue-800 py-10">
+          <div class="content sm-col-lg-row">
+            <img
+              src="assets/img/cozinha_restaurante.png"
+              class="object-contain -mb-2"
+              alt=""
+            />
+            <p class="text-white lg:max-w-[410px]">
+              Sabia que, além das frações, é possível identificar partes de um
+              todo por meio dos números decimais? Além de contar quantos pedaços
+              de pizza você comeu! HAHAHA! Avance para saber mais!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="container-grid bg-beige-300 py-10">
+          <div class="content sm-col-lg-row">
+            <div class="flex flex-col gap-8 lg:max-w-[29.5rem]">
+              <h3 class="title-h3">Pizza de números decimais</h3>
+              <p>
+                Sabe a sua pizza inteira? Essa pizza representa o número inteiro
+                1.
+              </p>
+              <p>
+                Agora, se você cortar essa pizza em10 pedaços iguais, cada
+                pedaço seria como 1 décimo da pizza.
+              </p>
+              <p>
+                Aqui, estão alguns exemplos de como os números decimais
+                funcionam usando a pizza:
+              </p>
+            </div>
+            <img
+              src="assets/img/pizza_2.png"
+              class="object-contain cursor-pointer"
+              alt=""
+              onclick="renderModalImage('assets/img/pizza_2.png')"
+            />
+          </div>
+          <div
+            class="relative content flex lg:flex-row gap-8 items-center justify-center lg:justify-between flex-wrap my-10"
+          >
+            <img
+              src="assets/img/maozinha.png"
+              alt=""
+              class="absolute -bottom-24 left-[calc(50%_-_3.123rem)] animate-pulse transition-all duration-300 w-[6.25rem] z-10"
+            />
+            <div
+              class="w-[12rem] h-[7.3125rem] bg-blue-800 relative flex items-center justify-center text-center text-destaque italic cursor-pointer"
+              onclick="renderModalGroup(0)"
+            >
+              <span
+                class="absolute w-[2.875rem] h-[2.875rem] rounded-full bg-yellow-800 top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+                >1</span
+              >
+              <span class="text-yellow-800">Um décimo</span>
+            </div>
+            <div
+              class="w-[12rem] h-[7.3125rem] bg-blue-800 relative flex items-center justify-center text-center text-destaque italic cursor-pointer"
+              onclick="renderModalGroup(1)"
+            >
+              <span
+                class="absolute w-[2.875rem] h-[2.875rem] rounded-full bg-yellow-800 top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+                >2</span
+              >
+              <span class="text-yellow-800">Vinte e cinco centésimos</span>
+            </div>
+            <div
+              class="w-[12rem] h-[7.3125rem] bg-blue-800 relative flex items-center justify-center text-center text-destaque italic cursor-pointer"
+              onclick="renderModalGroup(2)"
+            >
+              <span
+                class="absolute w-[2.875rem] h-[2.875rem] rounded-full bg-yellow-800 top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+                >3</span
+              >
+              <span class="text-yellow-800">Meio</span>
+            </div>
+            <div
+              class="pt-2 w-[12rem] h-[7.3125rem] bg-blue-800 relative flex items-center justify-center text-center text-destaque italic cursor-pointer"
+              onclick="renderModalGroup(3)"
+            >
+              <span
+                class="absolute w-[2.875rem] h-[2.875rem] rounded-full bg-yellow-800 top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+                >4</span
+              >
+              <span class="text-yellow-800"
+                >Um inteiro e setenta e cinco centésimos</span
+              >
+            </div>
+          </div>
+          <div class="content flex justify-start lg:justify-end"></div>
+
+          <div
+            class="content flex items-center flex-wrap gap-y-8 justify-center lg:justify-between"
+          >
+            <div class="flex flex-col gap-8 lg:max-w-[25.5rem] lg:w-1/2">
+              <p>
+                Então, os números decimais nos ajudam a representar partes
+                menores de um todo, assim como os pedaços de uma pizza. É uma
+                forma deliciosa e visual de entender como os números decimais
+                funcionam!
+              </p>
+              <p>
+                Você também encontrará muitos números decimais em receitas doces
+                e salgadas, por isso, é muito importante que você compreenda
+                esses conceitos. Para ver um exemplo de números decimais na
+                culinária, assista a este vídeo
+                <a
+                  target="_blank"
+                  href="https://www.youtube.com/watch?v=CykwgN3tluE"
+                  class="link-destaque"
+                  >clicando aqui</a
+                >.
+              </p>
+            </div>
+            <img
+              src="assets/img/confeiteiros.png"
+              class="object-contain lg:max-w-1/2"
+              alt=""
+            />
+          </div>
+          <div class="content py-10 flex flex-col gap-8">
+            <h3 class="title-h3">
+              Jogando com frações e números decimais na prática
+            </h3>
+            <p>
+              Vamos explorar a soma de frações e os números decimais utilizando
+              o exemplo da pizza. Vamos considerar a seguinte situação:
+            </p>
+            <p>
+              Você tem uma pizza de muçarela e, inicialmente, você comeu
+              <span class="inline-block">
+                <img
+                  class="-mb-[0.9rem]"
+                  src="assets/img/fracao/1_4.png"
+                  alt=""
+                />
+              </span>
+              dela. Depois, o seu amigo trouxe mais 0.6 de pizza de frango. Para
+              saber o quanto de pizza vocês têm no total, precisamos realizar
+              uma soma.
+            </p>
+            <h3 class="title-h3">Somando as frações:</h3>
+            <p>
+              Primeiro, somaremos a fração
+              <span class="inline-block">
+                <img
+                  class="-mb-[0.9rem]"
+                  src="assets/img/fracao/1_4.png"
+                  alt=""
+                /> </span
+              >. Se você comer
+              <span class="inline-block">
+                <img
+                  class="-mb-[0.9rem]"
+                  src="assets/img/fracao/1_4.png"
+                  alt=""
+                />
+              </span>
+              de uma pizza e depois o seu amigo trouxer mais pizza, somamos
+              <span class="inline-block">
+                <img
+                  class="-mb-[0.9rem]"
+                  src="assets/img/fracao/1_4.png"
+                  alt=""
+                />
+              </span>
+              + 0.6. Para fazer isso, precisamos ter a mesma base. Podemos
+              converter 0.6 em uma fração com denominador 4 multiplicando o
+              numerador e o denominador por 4:
+              <span class="inline-block">
+                <img
+                  class="-mb-[0.9rem]"
+                  src="assets/img/fracao/1_4.png"
+                  alt=""
+                />
+              </span>
+              +
+              <span class="inline-block">
+                <img
+                  class="-mb-[0.9rem]"
+                  src="assets/img/fracao/6_10.png"
+                  alt=""
+                />
+              </span>
+            </p>
+            <p>
+              Agora, somamos os numeradores mantendo o denominador comum:
+              <span class="inline-block">
+                <img
+                  class="-mb-[0.9rem]"
+                  src="assets/img/fracao/1_4.png"
+                  alt=""
+                />
+              </span>
+              +
+              <span class="inline-block">
+                <img
+                  class="-mb-[0.9rem]"
+                  src="assets/img/fracao/6_10.png"
+                  alt=""
+                />
+              </span>
+              =
+              <span class="inline-block">
+                <img
+                  class="-mb-[0.9rem]"
+                  src="assets/img/fracao/10_40.png"
+                  alt=""
+                />
+              </span>
+              +<span class="inline-block">
+                <img
+                  class="-mb-[0.9rem]"
+                  src="assets/img/fracao/24_40.png"
+                  alt=""
+                />
+              </span>
+            </p>
+            <p>
+              Em seguida, somamos os numeradores:
+              <span class="inline-block">
+                <img
+                  class="-mb-[0.9rem]"
+                  src="assets/img/fracao/10_24_40.png"
+                  alt=""
+                />
+              </span>
+              =
+              <span class="inline-block">
+                <img
+                  class="-mb-[0.9rem]"
+                  src="assets/img/fracao/34_40.png"
+                  alt=""
+                />
+              </span>
+            </p>
+            <p>
+              Simplificamos a fração, se possível:
+              <span class="inline-block">
+                <img
+                  class="-mb-[0.9rem]"
+                  src="assets/img/fracao/17_20.png"
+                  alt=""
+                />
+              </span>
+            </p>
+            <div
+              class="flex flex-col lg:flex-row gap-y-8 items-center lg:items-start lg:justify-between"
+            >
+              <p>
+                Muito bem! Já vimos a soma das frações, agora, vamos ver a soma
+                dos números decimais!
+              </p>
+              <img
+                src="assets/img/pessoas_comendo_pizza.png"
+                class="object-contain"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="content flex flex-col gap-8">
+            <h3 class="title-h3">Somando os números decimais:</h3>
+            <p>
+              Agora, se quisermos representar como número decimal, basta dividir
+              o numerador pelo denominador: = 0.85
+            </p>
+
+            <h3 class="title-h3">Resposta final:</h3>
+            <p>
+              Então, se você comeu de pizza de muçarela e o seu amigo trouxe
+              mais 0.6 de pizza de frango, você agora tem 0.85 de pizza no
+              total.
+            </p>
+            <h3 class="title-h3">Muito bem!</h3>
+            <p>
+              Você viu que os sólidos geométricos podem ser planificados,
+              fracionados e calculados por meio de frações e números decimais,
+              certo?
+            </p>
+          </div>
+          <div class="content sm-col-lg-row">
+            <div class="flex flex-col gap-8 lg:max-w-[28.5625rem]">
+              <p>
+                E se eu te disser que os sólidos geométricos podem nos ajudar a
+                calcular e medir volume? Pois é! Lembra quando falamos sobre os
+                dados planificados? Eles nos lembram uma caixa de entrega, como
+                essas que recebemos ao fazer compras online.
+              </p>
+              <p>
+                Nas próximas seções, falaremos um pouco mais sobre cubos,
+                volume, litros, entre outros temas importantes!
+              </p>
+            </div>
+            <img src="assets/img/delivery.png" class="object-contain" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="container-grid py-10" id="encomendaChegou">
+        <div class="content flex flex-col gap-8">
+          <h2 class="title-h2">A sua encomenda chegou!</h2>
+          <p>
+            Você já viu como as encomendas que pedimos via internet chegam? Na
+            maioria dos casos, bem organizadas dentro das caixas, certo? Os
+            objetos em geral ocupam todo ou quase todo o espaço da caixa, para
+            garantir não só uma boa apresentação ao abrirmos a caixa,mas também
+            para que a encomenda chegue inteira e em segurança. Isso acontece
+            porque as empresas sabem o volume de cada caixa.
+          </p>
+          <p>
+            A grandeza física que indica a quantidade de matéria presente em um
+            corpo é chamada de volume. Ou seja, o quanto de coisas é possível de
+            se colocar em uma caixa de transporte é chamado de
+            <strong class="text-destaque">volume</strong>! Quantas caixas cabem
+            em uma prateleira, em um caminhão ou em uma sala de armazenamento
+            também são exemplos de volume.
+          </p>
+          <div class="sm-col-lg-row">
+            <p class="lg:max-w-[36.25rem]">
+              Para uma análise mais prática, como exemplo, considere um cubo com
+              1 cm de aresta. A porção do espaço ocupada por esse cubo é uma
+              unidade de volume definida como 1 cm3 (lemos: “um centímetro
+              cúbico”).
+            </p>
+            <img
+              src="assets/img/cubo_1x1x1.png"
+              class="object-contain cursor-pointer"
+              onclick="renderModalImage('assets/img/cubo_1x1x1.png')"
+              alt=""
+            />
+          </div>
+          <div
+            class="flex items-center justify-center flex-col gap-y-8 lg:justify-between lg:flex-row"
+          >
+            <img
+              src="assets/img/mega_cubo.png"
+              onclick="renderModalImage('assets/img/mega_cubo.png')"
+              class="object-contain cursor-pointer"
+              alt=""
+            />
+            <div class="relative">
+              <img
+                src="assets/img/voce_sabia.png"
+                class="object-contain cursor-pointer"
+                onclick="renderModalImage('assets/img/unidade_medida.svg')"
+                alt=""
+              />
+              <img
+                src="assets/img/maozinha.png"
+                alt=""
+                class="animate-pulse transition-all duration-300 w-[6.25rem] absolute -bottom-20 -right-20"
+              />
+            </div>
+          </div>
+
+          <p>
+            Além do centímetro, milímetro,decímetro, metro cúbico e as demais
+            medidas de volume, existe também uma outra medida muito comum,
+            presente principalmente quando se trata de volume líquido.Consegue
+            lembrar? Continue em frente e você verá logo mais!
+          </p>
+
+          <h2 class="title-h2" id="litrosAqui">Quantos litros cabem aqui?</h2>
+          <p>
+            Uma outra unidade de volume muito usada é o
+            <strong class="text-destaque">litro (L)</strong>, definida como 1
+            dm3 (um decímetro cúbico). Assim, adotando o centímetro como
+            unidade, vamos medir o volume de um paralelepípedo retorretângulo de
+            dimensões 5 cm, 3 cm e 4 cm. Para isso, dividimos o paralelepípedo
+            em cubinhos com 1 cm de aresta:
+          </p>
+          <div class="flex justify-center items-center">
+            <img
+              src="assets/img/cubos_3.png"
+              onclick="renderModalImage('assets/img/cubos_3.png')"
+              class="object-contain cursor-pointer"
+              alt=""
+            />
+          </div>
+          <p>Volume = 5 x 3 x 4 = 60 cm3 = 0,06 dm3 = 0,06 L</p>
+        </div>
+      </div>
+      <div class="">
+        <div class="container-grid bg-blue-800 py-8">
+          <div class="content sm-col-lg-row">
+            <p class="text-white lg:max-w-[42.5rem]">
+              Quer ver na prática como essa divisão em cubinhos funciona? Clique
+              no botão com desenho de engrenagens para ver um simulador de
+              volume!
+            </p>
+            <div class="relative">
+              <a target="_blank" href="https://www.geogebra.org/m/mRYqR8AP">
+                <img src="assets/img/brain.png" class="object-contain" alt="" />
+              </a>
+
+              <img
+                src="assets/img/maozinha.png"
+                alt=""
+                class="animate-pulse transition-all duration-300 w-[6.25rem] absolute right-0 -bottom-20"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-grid py-10">
+        <div class="content flex flex-col gap-8">
+          <h3 class="title-h3">
+            Vejamos um outro exemplo de cálculo de volume:
+          </h3>
+          <p>
+            <strong class="text-destaque italic">1.</strong> Uma caixa-d’água
+            tem, internamente, a forma de um paralelepípedo retorretângulo, com
+            3 m de comprimento, 2 m de largura e 1 m de altura. Vamos calcular a
+            capacidade dessa caixa-d’água em litros?
+          </p>
+          <div class="sm-col-lg-row">
+            <div class="flex flex-col gap-8">
+              <p>
+                A capacidade de um recipiente é o seu volume interno.O volume
+                interno V da caixa-d’água é dado por:
+              </p>
+              <div class="flex items-center lg:justify-center">
+                <img
+                  src="assets/img/formula_1.png"
+                  class="object-contain"
+                  alt=""
+                />
+              </div>
+            </div>
+            <img
+              src="assets/img/retangulo.png"
+              onclick="renderModalImage('assets/img/retangulo.png')"
+              class="object-contain cursor-pointer"
+              alt=""
+            />
+          </div>
+          <div class="sm-col-lg-row">
+            <img
+              src="assets/img/tanque.png"
+              class="object-contain cursor-pointer"
+              alt=""
+              onclick="renderModalImage('assets/img/tanque.png')"
+            />
+            <div class="flex flex-col gap-8 lg:max-w-[29.125rem]">
+              <p>Como 1 L = 1 dm3 e 1 m3 = 1000 dm3, temos:</p>
+              <div class="items-center flex lg:justify-center">
+                <img
+                  src="assets/img/formula_2.png"
+                  class="object-contain"
+                  alt=""
+                />
+              </div>
+              <p>
+                Logo, a
+                <strong class="text-destaque">capacidade da caixa-d’água</strong
+                >, que é o seu volume interno, é
+                <strong class="text-destaque">6000L</strong>.
+              </p>
+            </div>
+          </div>
+          <div
+            class="flex justify-center flex-col lg:flex-row lg:justify-between items-center"
+          >
+            <div class="flex flex-col gap-8 lg:max-w-[28.3125rem]">
+              <p>Vamos a mais um exemplo prático!</p>
+              <p>
+                <strong class="text-destaque italic">2</strong>. Para calcular a
+                capacidade de um jarro de forma irregular, Paulo retirou água de
+                um aquário que tem a forma de um paralelepípedo retorretângulo e
+                encheu completamente o jarro.
+              </p>
+              <p>
+                Observando que o fundo do aquário tem 50cm de comprimento por 30
+                cm de largura e que, após a retirada, o nível da superfície da
+                água desceu 2 cm, o rapaz concluiu, corretamente, que
+                <strong class="text-destaque">
+                  a capacidade do jarro é de 3 L</strong
+                >
+                . E a explicação é simples:
+              </p>
+            </div>
+            <img
+              src="assets/img/homem_e_aquario.png"
+              class="object-contain w-full max-w-[30.625rem]"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <div class="container-grid bg-blue-800 py-10">
+          <div class="content sm-col-lg-row">
+            <p class="text-white">
+              Como o fundo do aquário tem
+              <strong class="text-yellow-800">forma retangular</strong> e, após
+              tirar a água, o nível da superfície
+              <strong class="text-yellow-800">baixou 2 cm</strong>, basta
+              multiplicar as medidas da seguinte forma:
+            </p>
+            <img src="assets/img/formula_3.png" class="object-contain" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <div class="container-grid bg-beige-300 py-10" id="origensFracoes">
+          <div class="content flex flex-col gap-8">
+            <h2 class="title-h2">Compreendendo as origens das frações!</h2>
+            <h3 class="title-h3">Um pouco de história...</h3>
+            <p>
+              Como você viu ao longo deste material, as frações têm grande
+              importância e utilidade em nossas vidas, por isso, nada mais justo
+              do que conhecer a sua origem e funcionalidade.
+            </p>
+            <p>
+              Houve um tempo em que o homem não conhecia as frações e elas só
+              foram introduzidas quando começamos a medir e a contar. Assim, ao
+              dividir um pedaço de madeira em duas partes de igual comprimento,
+              cada uma delas tinha metade do comprimento da madeira original. Em
+              símbolos, temo as seguintes representações de frações:
+            </p>
+            <div class="flex items-center justify-center flex-col gap-8">
+              <div>
+                <img
+                  src="assets/img/pizza_fracoes.png"
+                  class="object-contain cursor-pointer"
+                  onclick="renderModalImage('assets/img/pizza_fracoes.png')"
+                  alt=""
+                />
+                <div class="content flex justify-start lg:justify-end">
+                  <img
+                    src="assets/img/maozinha.png"
+                    alt=""
+                    class="hidden lg:block animate-pulse transition-all duration-300 w-[6.25rem]"
+                  />
+                  <img
+                    src="assets/img/maozinha.png"
+                    alt=""
+                    class="block lg:hidden animate-pulse transition-all duration-300"
+                  />
+                </div>
+              </div>
+              <div class="box-tutorial">
+                <span>Clique na imagem para ampliar.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-grid bg-blue-800 text-white py-10">
+        <div class="content sm-col-lg-row">
+          <p class="lg:max-w-[31.25rem]">
+            Os egípcios, provavelmente, foram os primeiros a inserirem as
+            frações em seu sistema de numeração, mas outros povos antigos também
+            o fizeram. E, assim como para os números inteiros, cada um tinha a
+            sua própria maneira de representar as frações. Observe na imagem
+            como é presente a ideia de que existe um inteiro e outras partes
+            junto da maior.
+          </p>
+          <img
+            src="assets/img/escrita_egipcia.png"
+            class="object-contain"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <div class="container-grid bg-beige-300 py-10">
+        <div class="content">
+          <p>
+            <strong class="text-destaque italic"> É importante lembrar</strong>
+            que, assim como outros elementos da geometria, da matemática e de
+            outras matérias específicas, tudo tem nome. E, nesse momento da sua
+            trajetória de estudante, é fundamental saber que cada número tem um
+            nome, e cada um deles tem uma função na fração. Veja:
+          </p>
+          <div class="sm-col-lg-row">
+            <img
+              src="assets/img/divisao_exemplo.png"
+              class="object-contain"
+              alt=""
+            />
+            <div class="flex flex-col gap-8 w-full lg:max-w-[32.5rem] mb-8">
+              <p>
+                O número 21 é o
+                <strong class="text-destaque">dividendo</strong>, ou seja, o
+                número que será dividido.
+              </p>
+              <p>
+                O número 5 é o <strong class="text-destaque">divisor</strong>,
+                pelo qual 21 será dividido.<br />
+                O número 4 é o
+                <strong class="text-destaque">quociente</strong> (resultado da
+                divisão).<br />
+                O número 1 é o <strong class="text-destaque">resto</strong>, ou
+                seja, o que sobrou da divisão.<br />
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col gap-8">
+            <h3 class="title-h3">Muito bem, estudante!</h3>
+            <p>
+              Você chegou ao fim deste material e, ao longo dos tópicos, você
+              viu os seguintes temas:
+            </p>
+            <ul class="text-xl list-disc ml-5">
+              <li>Planificações dos sólidos geométricos.</li>
+              <li>Frações e como calcular utilizando frações.</li>
+              <li>Cálculo de volume e litro.</li>
+            </ul>
+            <h2 class="title-h2">Bons estudos!</h2>
+          </div>
+        </div>
+      </div>
+      <div class="container-grid bg-beige-300">
+        <img src="assets/img/rodape.png" class="col-span-8" alt="" />
+      </div>
+    </div>
+
+    <!-- MODAL -->
+    <div
+      id="modal-1"
+      class="relative z-30 transition-opacity opacity-0 pointer-events-none"
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+        onclick="closeModal()"
+      ></div>
+      <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div
+          class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+        >
+          <div
+            class="relative transform overflow-hidden rounded-lg bg-white p-10 text-left shadow-xl transition-all sm:my-8 sm:min-w-[35.1875rem] sm:max-w-4xl sm:p-16"
+          >
+            <div class="absolute right-0 top-0 pr-4 pt-4 block">
+              <button
+                type="button"
+                id="closeModalButton"
+                class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                <span class="sr-only">Close</span>
+                <svg
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <!-- CONTENT -->
+            <div id="modal-content"></div>
+            <!-- END CONTENT -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END MODAL -->
+
+    <script src="assets/js/modalConfig.js"></script>
+    <script src="assets/js/modalData.js"></script>
+    <script src="assets/js/menu.js"></script>
+  </body>
+</html>

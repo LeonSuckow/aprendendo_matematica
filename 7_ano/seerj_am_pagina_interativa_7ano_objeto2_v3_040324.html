@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Open+Sans:wght@300..800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+      html {
+        scroll-behavior: smooth;
+      }
+
+      p {
+        font-size: 1.25rem;
+      }
+
+      .pulse {
+        animation: pulse 0.4s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(0.6);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .scroll-hidden::-webkit-scrollbar {
+        display: none;
+      }
+
+      @layer components {
+        .custom-container {
+          @apply mx-auto px-4 sm:px-6 lg:px-8;
+        }
+
+        .custom-content {
+          @apply mx-auto w-full  sm:max-w-2xl md:max-w-[61.25rem] xl:max-w-7xl;
+        }
+
+        .container-grid {
+          @apply grid grid-cols-8 gap-7 sm:w-full xl:max-w-7xl mx-auto;
+        }
+
+        .content {
+          @apply col-span-8 px-4 lg:px-0 lg:col-span-6 lg:col-start-2;
+        }
+
+        .title-h2 {
+          @apply text-red-600 font-bold font-serif text-[1.75rem];
+        }
+
+        .title-h3 {
+          @apply text-blue-800 text-xl font-bold italic;
+        }
+
+        .box-tutorial {
+          @apply bg-gray-200 px-6 py-4 text-blue-800 italic text-base;
+        }
+
+        .text-destaque {
+          @apply text-blue-800 text-xl font-bold;
+        }
+
+        .link-destaque {
+          @apply text-red-800 text-xl font-bold italic;
+        }
+
+        .sm-col-lg-row {
+          @apply flex flex-col gap-y-8 items-center lg:flex-row lg:justify-between;
+        }
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Open Sans"],
+              serif: ["Lora"],
+            },
+            colors: {
+              "red-600": "#da373d",
+              "red-800": "#D61A21",
+              "yellow-600": "#FFCE41",
+              "yellow-800": "#FFBD00",
+              "beige-300": "#FFF2D9",
+              "pink-800": "#BA2B70",
+              "pink-600": "#EE2A60",
+
+              "gray-200": "#EDEDED",
+              "blue-800": "#23519F",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <div class="sticky top-0 z-20">
+      <header
+        class="h-[5.5rem] max-h-[5.5rem] container-grid bg-yellow-800 relative"
+      >
+        <div class="content flex justify-end h-full relative">
+          <img
+            src="assets/img/logo_aprendendo_matematica.svg"
+            class="h-[100%] sm:h-[7.75rem] absolute inset-0 ml-10 lg:ml-0"
+          />
+          <button class="btn" onclick="toggleMenu()">
+            <img src="assets/img/icon_menu.png" alt="hamburger icon" />
+          </button>
+        </div>
+        <div
+          id="menu"
+          class="absolute duration-500 right-0 w-0 opacity-0 sm:max-w-[28.3125rem] h-screen bg-blue-800 px-10 py-10 z-20 pointer-events-none"
+        >
+          <div class="flex justify-end">
+            <button onclick="toggleMenu()">
+              <img src="assets/img/close_menu_btn.png" alt="" />
+            </button>
+          </div>
+          <ul
+            id="menuItems"
+            class="flex flex-col overflow-auto h-full overscroll-contain scroll-hidden"
+          ></ul>
+        </div>
+      </header>
+    </div>
+    <div class="z-10 relative">
+      <div
+        class="container-grid py-10 h-[26rem] bg-[url('assets/img/banner.png')] bg-cover"
+      >
+        <div class="content self-end">
+          <h1 class="text-white text-[2.5rem] font-bold font-serif">
+            Perímetros e números inteiros
+          </h1>
+        </div>
+      </div>
+      <div class="container-grid" id="nemSempreExistemTriangulos">
+        <div class="content sm-col-lg-row">
+          <div class="flex flex-col gap-8">
+            <h2 class="title-h2">Nem sempre existe um triângulo</h2>
+            <p>
+              Existe um triângulo com as medidas 1, 2 e 3? A resposta é não,
+              pois para que um triângulo exista, o maior lado precisa ser menor
+              do que a soma dos outros dois.
+            </p>
+            <div class="box-tutorial max-w-[27.5rem]">
+              <span
+                >Clique nos números posicionados sobre o poliedro para ver mais
+                sobre essa forma geométrica.</span
+              >
+            </div>
+          </div>
+          <img src="assets/img/menino_meditando.png" alt="" />
+        </div>
+      </div>
+      <div class="container-grid py-10 relative">
+        <!-- Start tab -->
+        <div class="content">
+          <nav class="nav-buttons">
+            <ul class="flex h-[5.5625rem]" id="nav-buttons-list">
+              <!-- Os botões serão gerados dinamicamente aqui -->
+            </ul>
+          </nav>
+          <div
+            id="nav-content"
+            class="nav-content lg:min-h-[20.75rem] duration-300 gap-8 flex flex-col hover: transition-all px-10 py-8 rounded-t-none md:rounded-tr-[3.125rem] rounded-[3.125rem]"
+          ></div>
+        </div>
+        <img
+          src="assets/img/maozinha.png"
+          alt=""
+          class="hidden md:block animate-pulse transition-all duration-300 w-[6.25rem] absolute left-[34rem] top-12"
+        />
+        <!-- End tab -->
+      </div>
+      <div class="container-grid bg-beige-300 py-10">
+        <div class="content sm-col-lg-row gap-8">
+          <img
+            src="assets/img/voce_sabia.png"
+            class="max-w-[20.4375rem] object-contain"
+            alt=""
+          />
+
+          <h3 class="title-h3">
+            O perímetro de um polígono é a soma das medidas dos seus lados.
+          </h3>
+        </div>
+        <div class="content sm-col-lg-row gap-8">
+          <div class="flex flex-col gap-8 md:max-w-[36.1875rem]">
+            <p>É fundamental entender que existe uma diferença entre:</p>
+            <ul class="list-disc ml-6 text-xl">
+              <li>
+                O <strong class="text-destaque">perímetro</strong> que é a soma
+                dos lados de um polígono; e
+              </li>
+              <li>
+                A <strong class="text-destaque">área</strong> desse polígono.
+              </li>
+            </ul>
+            <p>
+              Note que na figura podemos calcular o seu perímetro da seguinte
+              forma: 5 + 8 + 5 = <strong class="text-destaque">18 cm</strong>.
+            </p>
+            <p>
+              Portanto,o perímetro de uma determinada região do plano é o
+              comprimento da curva que delimita essa região.
+            </p>
+          </div>
+          <img
+            src="assets/img/triangulo_voce_sabia.png"
+            class="object-contain lg:max-w-[25rem] cursor-pointer"
+            onclick="renderModalImage('assets/img/triangulo_voce_sabia.png')"
+            alt=""
+          />
+        </div>
+        <div class="col-span-8 bg-blue-800 text-white text-center py-10">
+          <p>
+            Lembre-se de que uma circunferência também tem perímetro. <br />
+            Normalmente os livros trazem como comprimento da circunferência.
+          </p>
+        </div>
+      </div>
+      <div class="container-grid" id="circunferenciaTemPerimetro">
+        <div class="content flex flex-col py-10 gap-8">
+          <h2 class="title-h2">Circunferência tem perímetro?</h2>
+          <p>
+            Todas as circunferências são figuras semelhantes entre si. Logo, em
+            qualquer circunferência, a razão entre o seu comprimento C e a
+            medida 2R do seu diâmetro é constante. Costuma-se indicar essa
+            constante pela letra grega π (lemos como pi). Assim:
+          </p>
+          <div class="flex justify-center">
+            <img
+              src="assets/img/comprimento_da_circunferencia 1.png"
+              class="object-contain cursor-pointer"
+              onclick="renderModalImage('assets/img/comprimento_da_circunferencia 1.png')"
+              alt=""
+            />
+          </div>
+          <img
+            src="assets/img/formula_1.svg"
+            class="object-contain max-w-[35.8125rem]"
+            alt=""
+          />
+          <p>
+            Mas,de forma usual, o comprimento ou perímetro de uma circunferência
+            é dado pela expressão:
+          </p>
+          <div class="flex sm-col-lg-row justify-center gap-8">
+            <img
+              src="assets/img/formula_4.png"
+              class="object-contain cursor-pointer"
+              alt=""
+              onclick="renderModalImage('assets/img/formula_4.png')"
+            />
+            <div class="relative">
+              <img
+                src="assets/img/planeta.png"
+                class="object-contain -mb-12"
+                alt=""
+              />
+              <!-- <img
+                src="assets/img/arrow_planeta.png"
+                class="object-contain absolute -bottom-[50%] right-0 translate-x-full"
+                alt=""
+              /> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-grid bg-blue-800 py-10 text-white">
+        <div class="content">
+          <p>
+            A circunferência máxima contida na superfície terrestre e que divide
+            o planeta nos hemisférios Norte e Sul, é chamada de Linha do
+            Equador. Seu raio é 6370 kme, portanto, o seu comprimento é
+            aproximadamente 40 000 km.
+          </p>
+        </div>
+      </div>
+      <div class="container-grid" id="maiorPistaFormula1">
+        <div class="content sm-col-lg-row md:items-start py-10">
+          <div class="lg:min-w-[28.125rem]">
+            <h2 class="title-h2">Qual é a maior pista de fórmula1?</h2>
+            <img
+              src="assets/img/mapa_corrida.png"
+              onclick="renderModalImage('assets/img/mapa_corrida.png')"
+              class="object-contain cursor-pointer"
+              alt=""
+            />
+          </div>
+          <div class="flex flex-col items-end">
+            <img
+              src="assets/img/bandeiras.png"
+              class="object-contain max-w-[10.625rem] hidden lg:block"
+              alt=""
+            />
+            <p class="lg:max-w-[31.875rem]">
+              <strong class="text-destaque text-red-800"
+                >SPA-FRANCORCHAMPS</strong
+              >
+              é o circuito de maior comprimento do calendário da F1 de 2021, com
+              7.004 km. Fez parte da primeira temporada da modalidade em 1950 e
+              é onde o alemão Michael Schumacher foi o maior vencedor do
+              circuito com seis vitórias. Ao todo, foram 54 corridas realizadas
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="container-grid bg-beige-300 pt-[5rem] pb-10 relative">
+        <img
+          src="assets/img/Estrada.svg"
+          class="object-contain absolute right-0 top-0 hidden lg:block"
+          alt=""
+        />
+        <div class="content mb-10">
+          <h3 class="text-destaque max-w-[35.625rem]">
+            Como se percebe, calcular o perímetro é de extrema relevância, para
+            saber a quantidade de material necessária para asfaltar o trajeto.
+          </h3>
+        </div>
+        <div class="content mb-10">
+          <div
+            class="content flex lg:flex-row gap-8 items-center justify-center lg:justify-between flex-wrap my-8 relative"
+          >
+            <img
+              src="assets/img/maozinha.png"
+              alt=""
+              class="absolute -bottom-24 left-[calc(50%_-_3.123rem)] animate-pulse transition-all duration-300 w-[6.25rem] z-10"
+            />
+            <div
+              class="rounded-md w-[10rem] h-[3.125rem] bg-blue-800 flex items-center justify-center text-center text-destaque cursor-pointer relative"
+              onclick="renderModal(modal1Data)"
+            >
+              <span
+                class="absolute w-10 h-10 rounded-full bg-yellow-800 top-1/2 right-0 translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+                >1</span
+              >
+              <span class="text-yellow-800 block">Caso 1</span>
+            </div>
+            <div
+              class="rounded-md w-[10rem] h-[3.125rem] bg-blue-800 relative flex items-center justify-center text-center text-destaque cursor-pointer"
+              onclick="renderModal(modal2Data)"
+            >
+              <span
+                class="absolute w-10 h-10 rounded-full bg-yellow-800 top-1/2 right-0 translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+                >2</span
+              >
+              <span class="text-yellow-800">Caso 2</span>
+            </div>
+            <div
+              class="rounded-md w-[10rem] h-[3.125rem] bg-blue-800 relative flex items-center justify-center text-center text-destaque cursor-pointer"
+              onclick="renderModal(modal3Data)"
+            >
+              <span
+                class="absolute w-10 h-10 rounded-full bg-yellow-800 top-1/2 right-0 translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+                >3</span
+              >
+              <span class="text-yellow-800">Caso 3</span>
+            </div>
+            <div
+              class="rounded-md w-[10rem] h-[3.125rem] bg-blue-800 relative flex items-center justify-center text-center text-destaque cursor-pointer"
+              onclick="renderModal(modal4Data)"
+            >
+              <span
+                class="absolute w-10 h-10 rounded-full bg-yellow-800 top-1/2 right-0 translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+                >4</span
+              >
+              <span class="text-yellow-800">Caso 4</span>
+            </div>
+          </div>
+        </div>
+        <div class="content flex flex-col gap-8">
+          <p class="">
+            Como você pode perceber, o cálculo de perímetros e áreas é de
+            extrema importância noestudo prático de figuras geométricas. Então,
+            é fundamental saber que:
+          </p>
+          <div class="flex justify-center">
+            <img
+              src="assets/img/calculo_figura_geometrica.png"
+              class="cursor-pointer"
+              alt=""
+              onclick="renderModalImage('assets/img/calculo_figura_geometrica.png')"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="container-grid py-10" id="geometriaDasRoupas">
+        <div class="content flex flex-col gap-8">
+          <h2 class="title-h2">A geometria das roupas</h2>
+          <div class="flex sm-col-lg-row gap-8">
+            <p class="lg:max-w-[29.3125rem]">
+              Segundo
+              <strong class="text-destaque text-red-800">Javer Volpini</strong>,
+              professor de modelagem no Bacharelado em Moda, da Universidade
+              Federal de Juiz de Fora, “a matemática faz parte do dia a dia da
+              moda, desde a criação das peças até o destino final, o
+              consumidor”. Essa relação é muito clara quando se pensa na moda
+              enquanto negócio, na parte de gestão, distribuição e venda.
+            </p>
+            <img
+              src="assets/img/pessoas_comprando.png"
+              class="object-contain lg:max-w-[28.125rem]"
+              alt=""
+            />
+          </div>
+          <p>
+            “Como processo criativo e produtivo, ela não está ligada somente ao
+            subjetivo, como normalmente é associada. Costumo dizer que o papel
+            aceita tudo, mas nós fazemos roupas para os corpos, que respeitam as
+            medidas, proporções e simetrias”, acrescenta Volpini.
+          </p>
+          <div class="sm-col-lg-row gap-x-8">
+            <img
+              src="assets/img/prisma.svg"
+              class="object-contain cursor-pointer"
+              onclick="renderModalImage('assets/img/prisma.svg')"
+            />
+            <img
+              src="assets/img/prisma2.svg"
+              class="object-contain cursor-pointer"
+              onclick="renderModalImage('assets/img/prisma2.svg')"
+            />
+          </div>
+          <p>
+            A construção de uma peça começa com os croquis, que são esboços que
+            sugerem a roupa num corpo em poses. Para tornar viável a ideia
+            expressada nessa espécie de rascunho, é preciso planificar o desenho
+            e criar moldes em tamanhos reais para, posteriormente, cortar os
+            tecidos. Neste momento, as ferramentas da matemática prestam
+            serviços ao mundo fashion.”
+          </p>
+          <p>
+            Observe que do prisma foi retirado um molde e colocado em uma malha
+            quadriculada para tomar as suas medidas. A partir daí, começa o
+            processo de fabricação.
+          </p>
+          <div class="sm-col-lg-row">
+            <p class="lg:max-w-[28.125rem]">
+              Desde o corte até a fabricação, deve-se levar em conta a
+              quantidade de material para evitar desperdícios. Por isso,
+              conhecer as planificações de figuras, pode ajudar, e muito, na
+              confecção de peças de alta complexidade.
+            </p>
+            <img
+              src="assets/img/confeccao_falshion.png"
+              class="object-contain"
+            />
+          </div>
+          <div class="sm-col-lg-row gap-x-8">
+            <div
+              class="flex flex-col gap-8 justify-between lg:border-r-[.1875rem] lg:border-yellow-800 lg:pr-5"
+            >
+              <div class="pl-2 py-6 relative">
+                <span
+                  class="absolute -top-3 left-[.125rem] -translate-x-full w-10 h-10 rounded-full bg-yellow-800 flex items-center justify-center text-destaque text-blue-800"
+                  >1</span
+                >
+                <p class="lg:max-w-[25rem]">
+                  Será que você consegue imaginar qual figura geométrica será a
+                  planificação ao lado? Embora se trate de mero exercício
+                  mental, é importante imaginar como se faz os moldes de roupas
+                  e como tudo tem um começo. Imagine um cilindro. Como seria o
+                  seu molde?
+                </p>
+              </div>
+              <img
+                src="assets/img/cilindro_planificado.svg"
+                class="object-contain md:max-w-[34.0625rem] lg:max-w-[23.4375rem] cursor-pointer"
+                onclick="renderModalImage('assets/img/cilindro_planificado.svg')"
+              />
+            </div>
+            <div class="flex flex-col gap-8">
+              <div class="pl-2 pt-6 relative flex flex-col gap-8">
+                <span
+                  class="absolute -top-3 left-[.125rem] -translate-x-full w-10 h-10 rounded-full bg-yellow-800 flex items-center justify-center text-destaque text-blue-800"
+                  >2</span
+                >
+                <p class="lg:max-w-[27.5625rem]">
+                  Perceba, que na figura abaixo, podemos concluir que o
+                  estilista tem que ter uma bela ideia de quantidade para
+                  iniciar o corte de sua “obra de arte”. Assim, para a
+                  fabricação de roupas, em geral, é necessário ter uma boa noção
+                  de geometria plana e espacial.
+                </p>
+                <p>A planificação de um cone e seus elementos:</p>
+              </div>
+              <img
+                src="assets/img/cone_planificado.svg"
+                class="object-contain md:max-w-[34.0625rem] lg:max-w-[25.625rem] cursor-pointer"
+                onclick="renderModalImage('assets/img/cone_planificado.svg')"
+              />
+            </div>
+          </div>
+          <p>Assim,de forma prática, temos:</p>
+          <div class="sm-col-lg-row gap-x-8">
+            <img
+              src="assets/img/medidas.svg"
+              class="object-contain md:max-w-[34.0625rem] lg:max-w-[25.625rem] cursor-pointer"
+              onclick="renderModalImage('assets/img/medidas.svg')"
+            />
+            <img
+              src="assets/img/medidas_2.svg"
+              class="object-contain md:max-w-[34.0625rem] lg:max-w-[25.625rem] cursor-pointer"
+              onclick="renderModalImage('assets/img/medidas_2.svg')"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="container-grid">
+        <div class="content py-10">
+          <h2 class="title-h2">Bons estudos!</h2>
+        </div>
+      </div>
+      <div class="container-grid">
+        <img src="assets/img/rodape.png" class="col-span-8" alt="" />
+      </div>
+    </div>
+    <!-- MODAL -->
+    <div
+      id="modal-1"
+      class="relative z-30 transition-opacity opacity-0 pointer-events-none"
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+        onclick="closeModal()"
+      ></div>
+      <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div
+          class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+        >
+          <div
+            class="modal-bg relative transform overflow-hidden rounded-lg bg-blue-800 text-white p-10 text-left shadow-xl transition-all sm:my-8 sm:min-w-[35.1875rem] sm:max-w-5xl sm:p-16"
+          >
+            <div class="absolute right-0 top-0 pr-4 pt-4 block">
+              <button
+                type="button"
+                id="closeModalButton"
+                class="rounded-md bg-white text-blue-800 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                <span class="sr-only">Close</span>
+                <svg
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <!-- CONTENT -->
+            <div id="modal-content" class="h-full"></div>
+            <!-- END CONTENT -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- END MODAL -->
+    <script src="assets/js/modalConfig.js"></script>
+    <script src="assets/js/modalData.js"></script>
+    <script src="assets/js/menu.js"></script>
+    <script src="assets/js/tabConfig.js"></script>
+  </body>
+</html>
